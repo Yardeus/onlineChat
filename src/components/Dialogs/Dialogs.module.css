@@ -1,0 +1,44 @@
+.gridContainer {
+    display: grid;
+    grid-template-areas:    "head head"
+                            "dialogList messages"
+                            "dialogList send";
+    grid-template-columns: 3fr 9fr;
+    grid-template-rows: 1fr 10fr 1fr;
+
+
+}
+
+.head {
+    grid-area: head;
+
+}
+
+.dialogList {
+    grid-area: dialogList;
+
+}
+
+.createChat {
+    margin: 10px 0px 0px 20px;
+}
+
+.send {
+    grid-area: send;
+    max-width: 80%;
+
+}
+
+.logOut {
+    horiz-align: right;
+}
+
+.sender {
+    margin: 10px 0px 0px 20px;
+    background-color: white;
+}
+
+.messages {
+    grid-area: messages;
+
+}
