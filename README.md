@@ -12,6 +12,9 @@ To start the server part:
 
 ### `npm run server`
 
+For performance, you need to connect MySQL. The database dump "dumpOnlineChat. sql" is located in the root directory
+
+
 ## Video showcase
 
 [Youtube](https://youtu.be/G1yjDQNDG3Q)
