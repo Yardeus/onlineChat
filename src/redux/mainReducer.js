@@ -175,9 +175,19 @@ export const joinInRoom = (userId,roomId) => (dispatch) => {
     dispatch(toggleIsFetching(true));
     roomsAPI.joinInRoom(userId,roomId)
         .then((data) => {
-            dispatch(_setRooms(data));
-            dispatch(setSelectedRoom(roomId))
-            dispatch(toggleIsFetching(false));
+            switch (data) {
+                case 400:
+                    console.log("room not find")
+                    dispatch(toggleIsFetching(false));
+                    break
+
+                default:
+                    dispatch(_setRooms(data));
+                    dispatch(setSelectedRoom(roomId))
+                    dispatch(toggleIsFetching(false));
+                    break
+            }
+
         })
 }
 export const leaveRoom = (userId,roomId) => (dispatch) => {
