@@ -2,22 +2,33 @@ import React from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Dialogs from "./Dialogs";
-import {createRoom, setAuth, signIn} from "../../redux/mainReducer";
-import {usersAPI} from "../../api/api";
+import {
+    createRoom,
+    getMessages,
+    getRooms, joinInRoom, leaveRoom, logOut,
+    sendMessage,
+    setAuth, setOnlineUsersOnRoom,
+    setSelectedRoom,
+    setUsers
+} from "../../redux/mainReducer";
 import {Redirect} from "react-router-dom";
-
+import Preloader from "../common/preloader";
 class DialogsContainer extends React.Component {
 
-    LogOut = (userName) => {
+    LogOut = () => {
         this.props.setAuth(false)
-        //this.props.usersAPI.loginUser(userName)
-        return <Redirect to={'/'}/>
+        this.props.logOut()
     }
+
 
 
     render() {
         return (
-               <Dialogs {...this.props} LogOut={this.LogOut} createRoom={this.props.createRoom}/>
+            <>
+                {this.props.isAuth ? this.props.isFetching ? <Preloader/> : <Dialogs {...this.props} LogOut={this.LogOut}/> : <Redirect to={'/'}/> }
+            </>
+
+
         )
     }
 
@@ -27,10 +38,16 @@ class DialogsContainer extends React.Component {
 const mapStateToProps = (state) => ({
     isAuth: state.main.isAuth,
     userName: state.main.userName,
-    rooms: state.main.rooms
+    userId: state.main.userId,
+    rooms: state.main.rooms,
+    messages: state.main.messages,
+    isFetching: state.main.isFetching,
+    selectedRoom: state.main.selectedRoom,
+    onlineUsersOnRoom: state.main.onlineUsersOnRoom,
+    users: state.main.users
 
 })
 
 export default compose(
-    connect(mapStateToProps, {setAuth,createRoom})
+    connect(mapStateToProps, {setAuth,createRoom,setUsers,getRooms,getMessages,sendMessage,setSelectedRoom,setOnlineUsersOnRoom,joinInRoom,leaveRoom,logOut})
 )(DialogsContainer);

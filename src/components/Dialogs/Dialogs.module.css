@@ -1,44 +1,257 @@
+::-webkit-scrollbar-button {
+    background-repeat: no-repeat;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ecedee
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color: #3297dc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #56999f;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
 .gridContainer {
     display: grid;
-    grid-template-areas:    "head head"
-                            "dialogList messages"
-                            "dialogList send";
-    grid-template-columns: 3fr 9fr;
-    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-areas: "head head head" "dialogList messages chatUsers";
+    grid-template-columns: 3fr 5fr 3fr;
+    grid-template-rows: 1fr 7fr;
+
+    max-height: 850px;
 
 
 }
 
 .head {
     grid-area: head;
+    background-color: #7160ff;
+    padding-top: 15px;
+    height: 50px;
+    margin-bottom: 20px;
 
+}
+
+.headMessages {
+    border-bottom: 1px solid rgba(159, 183, 197, 0.1);
+
+    background-color: #f6f9fa;
+    display: grid;
+    grid-template-areas: "title menu";
+    grid-template-columns: 5fr 1fr;
+}
+
+.title {
+    grid-area: title;
+    justify-self: center;
+    align-self: center;
+}
+
+.menu {
+    grid-area: menu;
+    justify-self: end;
 }
 
 .dialogList {
     grid-area: dialogList;
 
+    height: 70vh;
+    border-right: 1px solid rgba(159, 183, 197, 0.1);
+    padding: 20px;
+    width: 230px;
+    background-color: #f6f9fa;
+    justify-self: end;
 }
 
+
+.rooms {
+    overflow: auto;
+    height: 63vh;
+}
+
+.room {
+    border-radius: 10px;
+    border: 1px solid silver;
+    background-color: #7160ff;
+    width: 80%;
+    padding: 5px 15px 5px;
+    margin: 10px 100px 5px 5px;
+    color: #fff;
+    cursor: pointer
+}
+
+.selectedRoom {
+    border-radius: 10px;
+    border: 3px solid silver;
+    background-color: #8160fc;
+    width: 80%;
+    padding: 5px 15px 5px;
+    margin: 10px 100px 5px 5px;
+    color: #fff;
+}
+
+.chatUsers {
+    grid-area: chatUsers;
+    border-left: 1px solid rgba(159, 183, 197, 0.1);
+    padding: 20px;
+    width: 200px;
+    height: 70vh;
+    background-color: #f6f9fa;
+
+}
+
+.roomsBtns{
+    display: grid;
+    grid-template-areas: "createChat invite";
+    grid-template-columns: 4fr 1fr;
+}
 .createChat {
+    grid-area: createChat;
     margin: 10px 0px 0px 20px;
 }
 
+.invite {
+    grid-area: invite;
+}
+
 .send {
+    display: grid;
     grid-area: send;
-    max-width: 80%;
+    width: 100%;
+    margin-top: 0;
 
 }
 
 .logOut {
-    horiz-align: right;
+    display: grid;
+    justify-content: end;
+    margin-right: 3%;
+}
+
+.warning {
+    display: grid;
+    justify-content: center;
+    align-content: center;
 }
 
 .sender {
-    margin: 10px 0px 0px 20px;
+    padding-top: 20px;
     background-color: white;
 }
 
-.messages {
-    grid-area: messages;
+.btnSend Button {
+
+    margin-top: 20px;
+    color: #f6f9fa;
 
 }
+
+.chatMessages {
+    grid-area: messages;
+    border-top: 1px solid rgba(159, 183, 197, 0.1);
+    border-bottom: 1px solid rgba(159, 183, 197, 0.1);
+
+
+}
+
+.messages {
+    margin: 30px;
+    padding: 10px;
+    overflow: auto;
+    height: 55vh;
+
+    max-width: 700px;
+}
+
+.message {
+    display: grid;
+    justify-content: start;
+    margin-bottom: 20px;
+    word-break: break-all;
+    margin-right: 40px;
+
+}
+
+.myMessage {
+    display: grid;
+    justify-content: end;
+    margin-left: 40px;
+    height: auto;
+    margin-bottom: 20px;
+    word-break: break-all;
+}
+
+.message p {
+
+    display: inline-flex;
+    border-radius: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #7160ff;
+    padding: 10px 15px 15px;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.myMessage p {
+    display: inline-flex;
+    border-radius: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #7160ff;
+    padding: 10px 15px 15px;
+    color: #fff;
+    margin-bottom: 2px;
+
+}
+
+.myMessage span {
+    display: grid;
+    justify-content: end;
+    opacity: 0.5;
+    font-size: 14px;
+    margin: 0px 10px;
+
+
+}
+
+.message span {
+    display: grid;
+    justify-content: start;
+    opacity: 0.5;
+    font-size: 14px;
+    margin: 0px 10px;
+
+}
+
+.noMessages {
+    border-radius: 10px;
+    border: 1px solid silver;
+    background-color: #855aff;
+    padding: 10px 15px 15px;
+    margin: 150px 80px;
+    color: #fff;
+}
+
+.chatUsers ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chatUsers ul li {
+    margin-top: 10px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 8px 14px;
+    box-shadow: 0 3px 5px rgba(159, 183, 197, 0.1);
+    font-weight: 500;
+}
+

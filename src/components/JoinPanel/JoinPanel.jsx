@@ -1,35 +1,35 @@
 import React, {useState} from "react";
-import socket from "../../api/socket";
-
 import s from './JoinPanel.module.css'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import axios from "axios";
-import {Redirect} from "react-router-dom";
+import socket from "../../api/socket";
 
-const instance = axios.create({
-//настройки
-    baseURL: 'http://localhost:4444/',
-
-});
 
 const JoinPanel = (props) => {
 
-
-    const [roomId, setRoomId] = useState('');
     const [userName, setUserName] = useState('');
-
-
     const join = () => {
         if (!userName) {
             return alert('Enter a name')
         }
-
-
         props.SignIn(userName);
-        //socket()
     }
-    //if (props.isAuth) return <Redirect to={'/dialogs'}/>
+
+
+    React.useEffect(() => {
+
+        socket.on('ROOM:SET_USERS', users => {
+            props.setOnlineUsersOnRoom(users)
+            console.log("новые пользователи онлайн", users)
+        })
+        socket.on('ROOM:SEND_MESSAGE', (roomId) => {
+            props.getMessages(roomId)
+            console.log("новые сообщения")
+        })
+
+
+    }, [])
+
 
     return (
         <div className={s.main}>
@@ -48,15 +48,13 @@ const JoinPanel = (props) => {
                     />
                 </div>
                 <div className={s.btn}>
-                    <Button variant="contained" color="primary" onClick={() => {
-                        join()
-                    }}>
-                        Connect
-                    </Button>
-
+                        <Button variant="contained" color="primary" onClick={() => {
+                            join()
+                        }}>
+                            Connect
+                        </Button>
                 </div>
             </div>
-
         </div>
     )
 }
